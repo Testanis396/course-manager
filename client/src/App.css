@@ -1,0 +1,105 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.courses {
+  margin-top: 30px;
+}
+
+button {
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.grid-view {
+  display: grid;
+}
+
+.grid-view .course.header {
+  font-weight: bold;
+  background-color: #f2f2f2;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-auto-rows: minmax(min-content, max-content);
+}
+
+.grid-view .grid-view-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-auto-rows: minmax(min-content, max-content);
+}
+
+.grid-view .grid-view-item .grid-view-cell {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.list-view {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-view .list-view-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.overlay {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
+}
+
+.modal {
+  position: fixed; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  background-color: #fff; 
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+  max-width: 400px; 
+  margin: 0 auto; 
+  padding: 20px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 400px; 
+  margin: 0 auto; 
+}
+
+.modal-content label,
+.modal-content input,
+.modal-content select {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
