@@ -39,7 +39,7 @@ function App() {
   }
 
   const submitCourse = () => {
-    Axios.post("http://localhost:3001/api/create", formData)
+    Axios.post("http://localhost:3001/api/courses", formData)
       .then((response) => {
         const newCourse = { ...formData, id: response.data.id }
         setCourseData([...courseData, newCourse])
@@ -169,6 +169,7 @@ function App() {
           <div className="list-view">
             {Array.isArray(courseData) && courseData.map(course => (
               <div key={course.id} className="list-view-item">
+                <div><strong>Id:</strong> {course.id}</div>
                 <div><strong>Subject:</strong> {course.subject}</div>
                 <div><strong>Number:</strong> {course.number}</div>
                 <div><strong>Name:</strong> {course.name}</div>

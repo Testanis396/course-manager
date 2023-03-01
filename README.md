@@ -21,12 +21,13 @@ user % npm start
 
 Server on localhost:(env.port or 3001).
 
+user % npm run dev
 user % npm start 
 
 Operations:
 - GET /api/courses => returns list of all courses.
 - GET /api/courses/{query} => returns a list of desired courses based on query parameters.
-- POST /api/create => add course, returns new course Id.
+- POST /api/courses => add course, returns new course Id.
 - PUT /api/courses/:id => edits course with id.
 - DELETE /api/courses/:id => deletes course with id.
 
