@@ -33,13 +33,11 @@ Operations:
 
 To do: 
 - create tests
-- implement pagination
 - display average GPA
 - group by school year
 - search by partial string
 - calculate credits
 - responsive design on the client
 - tailwind/bootstrap?
-- large course entries
 - input validation
 - multiple tables?
