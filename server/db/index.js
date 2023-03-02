@@ -10,10 +10,15 @@ const db = mysql.createConnection({
   })
 
   const getCourses = (req, res) => {
-    const { filterKey, filterValue, sortParams } = req.query
+    const { filterKey, filterValue, sortParams, page, limit} = req.query
     const filterBy = filterKey === "" ? null : filterKey
     const filterVal = filterValue === "" ? null : filterValue
     const params = JSON.parse(sortParams)
+    
+    // Calculate the offset and limit values based on the page and limit parameters
+    const offset = (page - 1) * limit
+    const sqlLimit = `LIMIT ${limit} OFFSET ${offset}`
+
     // query the database with the specified parameters
     let sql = "SELECT id, subject, number, name, credits, grade, DATE_FORMAT(date, '%Y-%m-%d') AS date FROM courses"
     if (filterBy && filterVal) {
@@ -30,6 +35,8 @@ const db = mysql.createConnection({
         }
       }
     }
+    sql += ` ${sqlLimit}`
+
     db.query(sql,
       (err, result) => {
         if (err) {

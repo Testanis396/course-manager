@@ -9,10 +9,13 @@ function App() {
   const [courseData, setCourseData] = useState([])
   const [filterKey, setFilterKey] = useState("")
   const [filterValue, setFilterValue] = useState("")
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(5)
   const [sortParams, setSortParams] = useState([{ sortKey: "", sortOrder: "" }])
-
+  
+  const [loaded, setLoaded] = useState(false);
   const [isGridView, setIsGridView] = useState(false)
-  const [showAllClicked, setShowAllClicked] = useState(false);
+  const [showAllClicked, setShowAllClicked] = useState(false)
   const [showAddModal, setShowAddModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
   const [showFilterModal, setShowFilterModal] = useState(false)
@@ -91,7 +94,7 @@ function App() {
     setShowFilterModal(true)
   }
 
-  const handleGetCourses = () => {
+  const handleGetCourses = (page, limit) => {
     let query = ""
     if (sortParams.length > 0) {
       query += `&sortParams=${encodeURIComponent(JSON.stringify(sortParams))}`
@@ -99,12 +102,11 @@ function App() {
     if (filterKey && filterValue) {
       query += `&filterKey=${filterKey}&filterValue=${filterValue}`
     }
+    query += `&page=${page}&limit=${limit}`
 
     Axios.get(`http://localhost:3001/api/courses?${query}`)
       .then(response => {
-        console.log(response.data.result)
         setCourseData(response.data.result)
-        console.log(courseData)
         setShowFilterModal(false)
         alert("Successfully retrieved course data!")
       })
@@ -116,10 +118,11 @@ function App() {
 
   useEffect(() => {
     if (showAllClicked) {
-      handleGetCourses()
+      setPage(1)
+      handleGetCourses(1, limit)
       setShowAllClicked(false)
     }
-  }, [handleGetCourses, showAllClicked])
+  }, [showAllClicked])
 
   const resetFilter = () => {
     setFilterKey("")
@@ -127,6 +130,14 @@ function App() {
     setSortParams([{ sortKey: "", sortOrder: "" }])
     setShowAllClicked(true)
   }
+
+  useEffect(() => {
+    if (loaded) {
+      handleGetCourses(page, limit);
+    } else {
+      setLoaded(true);
+    }
+  }, [limit, page, loaded]);  
 
   return (
     <div className="App">
@@ -137,6 +148,22 @@ function App() {
       </div>
 
       <div className="courses">
+        <div className="pagination">
+          <button onClick={() => {
+            setPage(Math.max(page - 1, 1))
+          }}>Prev</button>
+          <span>Page {page}</span>
+          <button onClick={() => {
+            setPage(page + 1)
+          }}>Next</button>
+          <select value={limit} onChange={e => setLimit(e.target.value)}>
+            <option value={5}>5 per page</option>
+            <option value={10}>10 per page</option>
+            <option value={20}>20 per page</option>
+            <option value={30}>30 per page</option>
+          </select>
+        </div>
+
         <button onClick={() => toggleView()}>{isGridView ? 'List View' : 'Grid View'}</button>
         {isGridView ? (
           <div className="grid-view">
@@ -318,10 +345,12 @@ function App() {
 
                 <label htmlFor="filter-value-input">Filter Value:</label>
                 <input type="text" id="filter-value-input" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
-                
+
                 <button onClick={() => handleAddSortParam()}>Add Sort Parameter</button>
                 <button onClick={() => resetFilter()}>Clear Parameters</button>
-                <button onClick={() => handleGetCourses()}>Submit</button>
+                <button onClick={() => {
+                  setPage(1)
+                }}>Submit</button>
                 <button onClick={() => setShowFilterModal(false)}>Close</button>
               </div>
             </div>
