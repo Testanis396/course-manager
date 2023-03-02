@@ -32,12 +32,12 @@ Operations:
 - DELETE /api/courses/:id => deletes course with id.
 
 To do: 
-- create tests
-- display average GPA
-- group by school year
-- search by partial string
-- calculate credits
-- responsive design on the client
-- tailwind/bootstrap?
-- input validation
-- multiple tables?
+- [ ] create tests
+- [ ] display average GPA
+- [ ] group by school year
+- [ ] search by partial string
+- [ ] calculate credits
+- [ ] responsive design on the client
+- [ ] tailwind/bootstrap?
+- [ ] input validation
+- [ ] multiple tables?
