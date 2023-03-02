@@ -39,5 +39,5 @@ To do:
 - [ ] calculate credits
 - [ ] responsive design on the client
 - [ ] tailwind/bootstrap?
-- [ ] input validation
+- [x] server input validation
 - [ ] multiple tables?

@@ -4,7 +4,7 @@ import Axios from "axios"
 
 function App() {
 
-  const gradeOptions = ["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"]
+  const gradeOptions = ["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F", "P", "W"]
 
   const [courseData, setCourseData] = useState([])
   const [filterKey, setFilterKey] = useState("")
@@ -164,7 +164,7 @@ function App() {
           </select>
         </div>
 
-        <button onClick={() => toggleView()}>{isGridView ? 'List View' : 'Grid View'}</button>
+        <button onClick={() => toggleView()}>{isGridView ? "List View" : "Grid View"}</button>
         {isGridView ? (
           <div className="grid-view">
             <div className="course header">

@@ -2,6 +2,11 @@ const express = require("express")
 const router = express.Router()
 
 const {
+    validateCourseData,
+    courseValidation
+} = require("../validation/index")
+
+const {
     getCourses,
     createCourse,
     editCourse,
@@ -11,10 +16,10 @@ const {
 router
     .route("/")
     .get(getCourses)
-    .post(createCourse)
+    .post([validateCourseData, courseValidation, createCourse])
 router
     .route("/:id")
-    .put(editCourse)
+    .put([validateCourseData, courseValidation, editCourse])
     .delete(deleteCourse)
-    
+
 module.exports = router

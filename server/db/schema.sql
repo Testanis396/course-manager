@@ -27,7 +27,7 @@ CREATE TABLE `courses` (
   `subject` tinytext NOT NULL,
   `number` int NOT NULL,
   `name` text NOT NULL,
-  `credits` int NOT NULL,
+  `credits` float NOT NULL,
   `grade` char(2) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`id`)
